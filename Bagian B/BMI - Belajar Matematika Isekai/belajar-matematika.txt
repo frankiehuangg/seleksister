@@ -1,0 +1,140 @@
+<_flag>:
+  # zero
+  sub     sp, sp, #48									# sp = sp - 48
+  stp     x29, x30, [sp, #32]						 	# [sp+32] = x30:x29
+  add     x29, sp, #32									# x29 = sp+32
+
+  # one
+  stur    w0, [x29, #-4]								# [x29-4] = w0
+  stur    w1, [x29, #-8]								# [x29-8] = w1
+  ldur    w8, [x29, #-4]								# w8 = [x29-4]
+  asr     w8, w8, #2									# w8 = w8 >> 2
+
+  # two
+  stur    w8, [x29, #-4]                                # [x29-4] = w8
+  ldur    w8, [x29, #-4]								# w8 = [x29-4]
+  add     w8, w8, #40									# w8 = w8 +40
+
+  # three
+  stur    w8, [x29, #-4]								# [x29-4] = w8
+  ldur    w8, [x29, #-4]								# w8 = [x29-4]
+  subs    w8, w8, #2									# w8 = w8-2
+
+  # four
+  stur    w8, [x29, #-4]								# [x29-4] = w8
+  ldur    w8, [x29, #-4]								# w8 = [x29-4]
+  mov     w9, #10										# w9 = 10
+  sdiv    w8, w8, w9									# w8 = w8/w9
+
+  # five
+  stur    w8, [x29, #-4]								# [x29-4] = w8
+  ldur    w8, [x29, #-8]								# w8 = [x29-8]
+  ldur    w9, [x29, #-4]								# w9 = [x29-4]
+  mul     w8, w8, w9									# w8 = w8*w9
+
+  # six
+  stur    w8, [x29, #-4]								# [x29-4] = w8
+  ldur    w8, [x29, #-8]								# w8 = [x29-8]
+  ldur    w9, [x29, #-4]								# w9 = [x29-4]
+  mul     w8, w8, w9									# w8 = w8*w9
+
+  # seven
+  stur    w8, [x29, #-8]								# [x29-8] = w8
+  ldur    w8, [x29, #-8]								# w8 = [x29-8]
+  ldur    w9, [x29, #-4]								# w9 = [x29-4]
+  ldur    w10, [x29, #-8]								# w10 = [x29-8]
+  mul     w9, w9, w10									# w9 = w9*w10
+  lsl     w8, w8, w9									# w8 = w8<<w9
+
+  # eight
+  stur    w8, [x29, #-4]								# [x29-4] = w8
+  ldur    w8, [x29, #-4]								# w8 = [x29-4]
+  ldur    w9, [x29, #-8]								# w9 = [x29-8]
+  and     w8, w8, w9									# w8 = w8&w9
+
+  # nine
+  stur    w8, [x29, #-12]								# [x29-12] = w8
+  ldur    w8, [x29, #-12]								# w8 = [x29-12]
+  ldur    w9, [x29, #-4]								# w9 = [x29-4]
+  eor     w8, w8, w9									# w8 = w8 EXOR w9
+  ldur    w9, [x29, #-8]								# w9 = [x29-8]
+  orr     w8, w8, w9									# w8 = w8 | w9
+
+  # ten
+  stur    w8, [x29, #-12]								# [x29-12] = w8
+  ldur    s1, [x29, #-4]								# s1 = [x29-4]
+  fmov    s0, s1										# s0 = s1
+  sshll.2d        v0, v0, #0							# v0 = v0 << 0
+  scvtf   d0, d0										# d0 = d0
+
+  # eleven
+  ldur    s2, [x29, #-8]								# s2 = [x29-8]
+  fmov    s1, s2										# s1 = s2	
+  sshll.2d        v1, v1, #0							# v1 = v1 << 0
+  scvtf   d1, d1										# d1 = d1
+
+  # twelve
+  bl      0x100003f9c <_printf>							# printf
+
+  # thirteen
+  str     d0, [sp, #8]									# [sp+8] = d0
+  ldur    s1, [x29, #-12]								# s1 = [x29-12]
+  fmov    s0, s1										# s0 = s1
+  sshll.2d        v0, v0, #0							# v0 = v0 << 0
+  scvtf   d0, d0										# d0 = d0
+
+  # fourteen
+  ldur    s2, [x29, #-12]								# s2 = [x29-12]
+  fmov    s1, s2										# s1 = s2
+  sshll.2d        v1, v1, #0							# v1 = v1 << 0
+  scvtf   d1, d1										# d1 = d1
+
+  # fifteen
+  bl      0x100003f9c <_printf>							# printf
+
+  # sixteen
+  fmov    d1, d0										# d1 = d0
+  ldr     d0, [sp, #8]									# d0 = [sp+8]
+  fmul    d0, d0, d1									# d0 = d0*d1
+  fcvtzs  w0, d0										# w0 = d0
+
+  # seventeen
+  ldp     x29, x30, [sp, #32]							# x30:x29 = [sp+32]
+  add     sp, sp, #48									# sp = sp+48
+  ret													# return
+
+<_main>:
+  sub     sp, sp, #64									# sp = sp - 64
+  stp     x29, x30, [sp, #48]                           # [sp+48] = x30:x29
+  add     x29, sp, #48									# x29 = sp + 48
+  
+  mov     w8, #0                                        # w8 = 0
+  str     w8, [sp, #20]                                 # [sp+20] = w8
+  stur    wzr, [x29, #-4]                               # [x29-4] = 0 (wzr)
+  mov     w0, #42										# w0 = 42
+  str     w0, [sp, #12]                                 # [sp+12] = w0
+  mov     w1, #69                                       # w1 = 69
+  str     w1, [sp, #16]                                 # [sp+16] = w1
+
+  bl      0x100003e10 <_flag>                           # jmp to _flag
+  ldr     w1, [sp, #12]									# w1 = [sp+12]
+  mov     x8, x0										# x8=x0
+  ldr     w0, [sp, #16]									# w0 = [sp+16]
+  scvtf   d0, w8										# d0 = w8
+  stur    d0, [x29, #-16]								# [x29-16] = d0
+
+  bl      0x100003e10 <_flag>							# jmp to _flag
+  scvtf   d0, w0										# d0 = w0
+  str     d0, [sp, #24]									# [sp+24] = d0
+  ldur    d0, [x29, #-16]								# d0 = [x29-16]
+  ldr     d1, [sp, #24]									# d1 = [sp+24]
+  fadd    d0, d0, d1									# d0 = d0+d1
+  mov     x8, sp										# x8 = sp
+  str     d0, [x8]										# [x8] = d0
+  adrp    x0, 0x100003000 <_main+0x60>					# x0 = PC(63:12):0(11:0) + 0x100003000(33:12):0(11:0)
+  add     x0, x0, #4020									# x0 = x0+4020
+  bl      0x100003fa8 <_printf>							# printf
+  ldr     w0, [sp, #20]									# w0 = [sp+20]
+  ldp     x29, x30, [sp, #48]							# x30:x29 = [sp+48]
+  add     sp, sp, #64									# sp = sp+64
+  ret													# return
