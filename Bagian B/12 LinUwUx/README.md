@@ -1,7 +1,7 @@
 # LinUwUx
 
 Neofetch screenshot:
-![](neofetch.png)
+![](assets/neofetch.png)
 
 Video:
-
+![](assets/video.mp4)
