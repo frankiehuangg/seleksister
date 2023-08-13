@@ -59,7 +59,7 @@ pub fn main() !void {
 
     try stdout.print("Klak-klak-klakulator...\n", .{});
     try stdout.print("Only integer calculations are valid!\n\n", .{});
-    try stdout.print("Please enter an expression, or type \"exit\" to quit.\n\n", .{});
+    try stdout.print("Please enter an expression, or CTRL+C to quit.\n\n", .{});
     try stdout.print("An expression must be placed between two numbers seperated by a space\n", .{});
     try stdout.print("Valid expressions include: (+) (-) (*) (/) (^)\n\n", .{});
     try stdout.print("Examples of valid expressions:\n", .{});
