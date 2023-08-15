@@ -1,3 +1,6 @@
 [submodule "Bagian B/08 One more time"]
 	path = Bagian B/08 One more time
 	url = git@github.com:frankiehuangg/Interpol.git
+[submodule "Bagian B/13 Git gitty"]
+	path = Bagian B/13 Git gitty
+	url = https://github.com/frankiehuangg/tea
